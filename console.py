@@ -10,11 +10,11 @@ class HBNBCommand(cmd.Cmd):
     """The console module class"""
     prompt = "(hbnb) "
 
-    def do_quit(self, args):
+    def do_quit(self, line):
         """Quit command to exit the program"""
         return True
 
-    def do_EOF(self, args):
+    def do_EOF(self, line):
         """EOF command to exit the program"""
         return True
 
@@ -23,6 +23,11 @@ class HBNBCommand(cmd.Cmd):
         the previous command when ENTER pressed
         """
         pass
+
+    def postloop(self) -> None:
+        """Method to handle ^D when entered to exit,
+        so the terminal does not look messy."""
+        print
 
 
 if __name__ == "__main__":
