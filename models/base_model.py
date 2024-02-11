@@ -1,14 +1,12 @@
 #!/usr/bin/python3
-""" this is the base_model """
-
-
+"""This is the base_model"""
 import uuid
 from datetime import datetime
 import models
 
 
 class BaseModel:
-    """ The Base Model class """
+    """The Base Model class"""
 
     def __init__(self, *args, **kwargs):
         """
@@ -31,27 +29,26 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
-
             models.storage.new(self)
 
     def __str__(self):
         """
-        string representation to the object
+        Returns the string representation to the object
         """
-
         return ("[{}] ({}) {}"
                 .format(type(self).__name__, self.id, self.__dict__))
 
     def save(self):
         """
         save is a method that will update current date time
+        when any attribute get updated
         """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
         """
-        returns a dictionary containing all keys/values of __dict__
+        Returns a dictionary containing all keys/values of __dict__
         """
         dict_var = {**self.__dict__}
         dict_var["__class__"] = type(self).__name__
